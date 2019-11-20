@@ -14,3 +14,4 @@ Package      Version
     sqlparse     0.3.0  
     webencodings 0.5.1  
     wheel        0.33.6  
+    shortuuid    0.5.0  
