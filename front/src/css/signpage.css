@@ -94,7 +94,7 @@ html[data-theme=dark] .Card-section + .Card-section:after {
     flex-direction: column;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    background-image: url("../img/logonbackground.jpeg");
+    /*background-image: url("../../src/image/logonbackground.jpeg");*/
     background-repeat: no-repeat;
     background-color: #b8e5f8;
     background-size: cover;
