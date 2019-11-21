@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'front',
     'apps.cms',
     'apps.base',
+    'apps.whursauth',
 ]
 
 MIDDLEWARE = [
@@ -111,6 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'whursauth.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
