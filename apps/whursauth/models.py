@@ -41,6 +41,8 @@ class User(AbstractBaseUser,PermissionsMixin):
     date_joined = models.DateTimeField(auto_now_add=True)
 
     ## 本次项目独有的字段
+    # 学号
+    std_id = models.CharField(max_length=13)
     # 学院
     school = models.CharField(max_length=15)
     # 积分
