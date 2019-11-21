@@ -42,14 +42,14 @@ class User(AbstractBaseUser,PermissionsMixin):
 
     ## 本次项目独有的字段
     # 学号
-    std_id = models.CharField(max_length=13)
+    std_id = models.CharField(max_length=13,unique=True)
     # 学院
     school = models.CharField(max_length=15)
     # 积分
     points = models.IntegerField(default=0)
     ##
     # 作为唯一字段进行验证，不设置的话默认是username
-    USERNAME_FIELD = 'telephone'
+    USERNAME_FIELD = 'std_id'
     REQUIRED_FIELDS = ['username']
     EMAIL_FIELD = 'email'
 
