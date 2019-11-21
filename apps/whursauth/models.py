@@ -3,26 +3,27 @@ from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin,BaseUse
 from shortuuidfield import ShortUUIDField
 
 class UserManager(BaseUserManager):
-    def _create_user(self,telephone,username,password,**kwargs):
-        if not telephone:
-            raise ValueError('需要传入手机号码')
+    def _create_user(self,std_id,username,password,**kwargs):
+        if not std_id:
+            raise ValueError('需要传入学号')
         if not username:
             raise ValueError('需要传入用户名')
         if not password:
             raise ValueError('需要传入密码')
 
-        user = self.model(telephone=telephone,username=username,**kwargs)
+        user = self.model(std_id=std_id,username=username,**kwargs)
         user.set_password(password)
+        user.save()
         return user
 
-    def create_user(self,telephone,username,password,**kwargs):
+    def create_user(self,std_id,username,password,**kwargs):
         # 创建普通用户
         kwargs['is_superuser'] = False
-        return self._create_user(telephone,username,password,**kwargs)
+        return self._create_user(std_id,username,password,**kwargs)
 
-    def create_supper_user(self,telephone,username,password,**kwargs):
+    def create_superuser(self,std_id,username,password,**kwargs):
         kwargs['is_superuser'] = True
-        return self._create_user(telephone,username,password,**kwargs)
+        return self._create_user(std_id,username,password,**kwargs)
 
 
 
