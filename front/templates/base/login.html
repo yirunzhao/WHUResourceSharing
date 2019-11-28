@@ -33,7 +33,9 @@
                         <div class="SignContainer-inner">
                             <form novalidate="" class="SignFlow Login-content"
                                   data-za-detail-view-path-module="SMSSignInForm"
-                                  data-za-extra-module="{&quot;card&quot;:{&quot;content&quot;:null}}">
+                                  data-za-extra-module="{&quot;card&quot;:{&quot;content&quot;:null}}"
+                            method="post" action="{% url 'base:base_login' %}">
+                                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
                                 <div class="SignFlow-account">
                                     <div class="SignFlow-supportedCountriesSelectContainer">
                                         <div class="Popover">
@@ -47,7 +49,8 @@
                                     <span class="SignFlow-accountSeperator">&nbsp;</span>
                                     <div class="SignFlowInput SignFlow-accountInputContainer">
                                         <label class="SignFlow-accountInput Input-wrapper">
-                                            <input name="username" type="number" class="Input" value="">
+{#                                            <input name="username" type="number" class="Input" value="">#}
+                                            <input name="std_id" type="number" class="Input" value="">
                                         </label>
                                         <div class="SignFlowInput-errorMask SignFlowInput-requiredErrorMask SignFlowInput-errorMask--hidden"></div>
                                     </div>
@@ -65,7 +68,8 @@
                                     <span class="SignFlow-accountSeperator">&nbsp;</span>
                                     <div class="SignFlowInput SignFlow-accountInputContainer">
                                         <label class="SignFlow-accountInput Input-wrapper">
-                                            <input name="username" type="password" class="Input" value="">
+{#                                            <input name="username" type="password" class="Input" value="">#}
+                                            <input name="password" type="password" class="Input" value="">
                                         </label>
                                         <div class="SignFlowInput-errorMask SignFlowInput-requiredErrorMask SignFlowInput-errorMask--hidden"></div>
                                     </div>

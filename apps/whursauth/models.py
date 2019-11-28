@@ -51,7 +51,7 @@ class User(AbstractBaseUser,PermissionsMixin):
     ##
     # 作为唯一字段进行验证，不设置的话默认是username
     USERNAME_FIELD = 'std_id'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ['username','telephone','email']
     EMAIL_FIELD = 'email'
 
     objects = UserManager()
@@ -61,4 +61,3 @@ class User(AbstractBaseUser,PermissionsMixin):
 
     def get_short_name(self):
         return self.username
-
