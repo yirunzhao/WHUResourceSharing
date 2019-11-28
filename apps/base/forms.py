@@ -11,3 +11,4 @@ class RegisterForm(forms.Form,FormMixin):
     username = forms.CharField(max_length=20)
     telephone = forms.CharField(max_length=11,min_length=11)
     password = forms.CharField(max_length=20, min_length=6)
+    email = forms.EmailField()

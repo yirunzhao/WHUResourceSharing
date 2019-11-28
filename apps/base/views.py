@@ -45,7 +45,7 @@ class LoginView(View):
 
 class RegisterView(View):
     def get(self,request):
-        return HttpResponse('这里是注册页面')
+        return render(request,'base/resiger.html')
 
     def post(self,request):
         form = RegisterForm(request.POST)
@@ -53,10 +53,12 @@ class RegisterView(View):
             std_id = form.cleaned_data.get('std_id')
             username = form.cleaned_data.get('username')
             telephone = form.cleaned_data.get('telephone')
+            email = form.cleaned_data.get('email')
+            print(email)
             password = form.cleaned_data.get('password')
-
+            print(password)
             # 创建用户
-            User.objects.create_user(std_id,username,password)
+            User.objects.create_user(std_id,username,password,telephone=telephone,email=email)
             return HttpResponse('创建成功')
         else:
             errors = form.get_errors()
