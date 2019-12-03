@@ -1,7 +1,6 @@
 # from django.db import models
 # from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin,BaseUserManager
 # from shortuuidfield import ShortUUIDField
-#
 # class UserManager(BaseUserManager):
 #     def _create_user(self,std_id,username,password,**kwargs):
 #         if not std_id:
