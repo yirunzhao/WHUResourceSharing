@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,reverse
 from django.http import HttpResponse
 
 from django.contrib.auth import login,logout,authenticate
@@ -27,6 +27,7 @@ class LoginView(View):
             if user:
                 if user.is_active:
                     login(request, user)
+                    request.session['std_id'] = std_id
                     if remember:
                         request.session.set_expiry(None)
                     else:
@@ -64,6 +65,20 @@ class RegisterView(View):
             errors = form.get_errors()
             return JsonResponse({'code':499,'message':'','data':errors})
 
+
+def index(request):
+    # if user is not valid
+    std_id = request.session.get('std_id')
+    if std_id:
+        user = User.objects.get(std_id=std_id)
+    else:
+        return HttpResponse('没有std_id')
+    # 如果user存在
+    if user:
+        return redirect(reverse('base:base_user'))
+    else:
+        return redirect(reverse('base:base_login'))
+    # return HttpResponse('ok')
 
 
 def user_page(request):
