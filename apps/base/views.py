@@ -45,7 +45,7 @@ class LoginView(View):
 
 class RegisterView(View):
     def get(self,request):
-        return render(request,'base/resiger.html')
+        return render(request,'base/signup.html')
 
     def post(self,request):
         form = RegisterForm(request.POST)
@@ -63,3 +63,8 @@ class RegisterView(View):
         else:
             errors = form.get_errors()
             return JsonResponse({'code':499,'message':'','data':errors})
+
+
+
+def user_page(request):
+    return render(request,'base/user.html')
