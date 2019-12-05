@@ -7,7 +7,7 @@ extra_js:
   - "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"
   - "dashboard.js"
 -->
-
+{% load static %}
 <!doctype html>
 <html lang="zh-CN">
  <head>
@@ -15,7 +15,7 @@ extra_js:
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Custom styles for this template -->
-    <link href="./css/user.css" rel="stylesheet">
+    <link href={% static 'css/user.css'%} rel="stylesheet">
  </head>
  <body>
 	<!--
@@ -35,9 +35,9 @@ extra_js:
 		<nav class="col-md-2 d-none d-md-block bg-light sidebar">
 		  <div class="sidebar-sticky">
 		    <a class="nav-link active" href="#">
-				<img class="img-fluid img-thumbnail" src="./img/user.png" alt="头像" width="100" height="100">
+				<img class="img-fluid img-thumbnail" src={% static 'image/user.png' %} alt="头像" width="100" height="100">
 			</a>
-			<p class="mb-4 h5 nav-link text-secondary">nickname</p>
+			<p class="mb-4 h5 nav-link text-secondary">{{ username }}</p>
 			<ul class="nav flex-column ">
 			  <li class="nav-item">
 				<a class="nav-link active text-info" href="#">
@@ -84,7 +84,7 @@ extra_js:
 					  <div class="row">
 						<div class="col-md-4">
 						  <div class="card mb-4 shadow-sm mt-4">
-							<img class="rounded mx-auto d-block" src="./img/user.png" alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
+							<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
 							<div class="card-body">
 							  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
 							  <div class="d-flex justify-content-between align-items-center">
@@ -99,7 +99,7 @@ extra_js:
 						</div>
 						<div class="col-md-4">
 						  <div class="card mb-4 shadow-sm mt-4">
-							<img class="rounded mx-auto d-block" src="./img/user.png" alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
+							<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
 							<div class="card-body">
 							  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
 							  <div class="d-flex justify-content-between align-items-center">
@@ -114,7 +114,7 @@ extra_js:
 						</div>
 						<div class="col-md-4">
 						  <div class="card mb-4 shadow-sm mt-4">
-							<img class="rounded mx-auto d-block" src="./img/user.png" alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
+							<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
 							<div class="card-body">
 							  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
 							  <div class="d-flex justify-content-between align-items-center">
@@ -137,7 +137,7 @@ extra_js:
 					  <div class="row">
 						<div class="col-md-4">
 						  <div class="card mb-4 shadow-sm mt-4">
-							<img class="rounded mx-auto d-block" src="./img/user.png" alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
+							<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
 							<div class="card-body">
 							  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
 							  <div class="d-flex justify-content-between align-items-center">
@@ -152,7 +152,7 @@ extra_js:
 						</div>
 						<div class="col-md-4">
 						  <div class="card mb-4 shadow-sm mt-4">
-							<img class="rounded mx-auto d-block" src="./img/user.png" alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
+							<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
 							<div class="card-body">
 							  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
 							  <div class="d-flex justify-content-between align-items-center">
@@ -167,7 +167,7 @@ extra_js:
 						</div>
 						<div class="col-md-4">
 						  <div class="card mb-4 shadow-sm mt-4">
-							<img class="rounded mx-auto d-block" src="./img/user.png" alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
+							<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
 							<div class="card-body">
 							  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
 							  <div class="d-flex justify-content-between align-items-center">
@@ -193,6 +193,7 @@ extra_js:
  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js" crossorigin="anonymous"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"
  crossorigin="anonymous"></script>
+ <script src="./js/dashboard.js" crossorigin="anonymous"></script>
  </body>
 </html>
 

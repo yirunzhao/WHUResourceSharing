@@ -67,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.base.context_processor.user_information',
             ],
             # 静态文件标签加载
             'builtins':[
@@ -89,7 +90,7 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'USER': 'root',
-        'PASSWORD': 'zyr991225',
+        'PASSWORD': 'Zyr991225+',
     }
 }
 

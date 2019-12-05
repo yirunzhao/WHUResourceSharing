@@ -1,12 +1,13 @@
 from apps.whursauth.models import User
 
-def front_user(request):
-    user_id = request.session.get('user_id')
+def user_information(request):
+    std_id = request.session.get('std_id')
     context = {}
     try:
-        user = User.objects.get(pk=user_id)
+        user = User.objects.get(std_id=std_id)
         if user:
-            context['front_user'] = user
+            context['std_id'] = user.std_id
+            context['username'] = user.username
     except:
         pass
     return context
