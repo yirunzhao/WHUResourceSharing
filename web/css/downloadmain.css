@@ -8,6 +8,7 @@
 
 .username{
     margin-left: 0px;
+    margin-top: 10px;
 }
 
 .downloadimg{
@@ -18,4 +19,9 @@
 
 .container{
     margin-top: 5%;
+}
+
+.btn-primary{
+    width: 90%;
+    margin-left: 15px;
 }
