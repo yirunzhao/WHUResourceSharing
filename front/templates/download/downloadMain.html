@@ -1,10 +1,12 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>下载页</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/downloadmain.css">
+{#    <link rel="stylesheet" href="css/downloadmain.css">#}
+    <link rel="stylesheet" href={% static 'css/downloadmain.css' %}>
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -25,7 +27,8 @@
             <div class="list-group">
                 <a href="#" class="list-group-item">
                     <div class="col-md-2 col-xs-2 col-sm-2">
-                        <img src="img/hjw.jpg" class="downloadimg">
+{#                        <img src="img/hjw.jpg" class="downloadimg">#}
+                        <img src={% static 'image/hjw.jpg' %} class="downloadimg">
                     </div>
                     <h4 class="list-group-item-heading">
                         免费域名注册
@@ -37,7 +40,7 @@
                 </a>
                 <a href="#" class="list-group-item">
                     <div class="col-md-2 col-xs-2 col-sm-2">
-                        <img src="img/hjw.jpg" class="downloadimg">
+                        <img src={% static 'image/hjw.jpg' %} class="downloadimg">
                     </div>
                     <h4 class="list-group-item-heading">
                         24*7 支持
@@ -49,7 +52,7 @@
                 </a>
                 <a href="#" class="list-group-item">
                     <div class="col-md-2 col-xs-2 col-sm-2">
-                        <img src="img/hjw.jpg" class="downloadimg">
+                        <img src={% static 'image/hjw.jpg' %} class="downloadimg">
                     </div>
                     <h4 class="list-group-item-heading">
                         免费域名注册
@@ -61,7 +64,7 @@
                 </a>
                 <a href="#" class="list-group-item">
                     <div class="col-md-2 col-xs-2 col-sm-2">
-                        <img src="img/hjw.jpg" class="downloadimg">
+                        <img src={% static 'image/hjw.jpg' %} class="downloadimg">
                     </div>
                     <h4 class="list-group-item-heading">24*7 支持</h4>
                     <span class="badge">积分：20</span>
@@ -73,7 +76,7 @@
             <div class="thumbnail">
                 <div class="row">
                     <div class="col-md-5 col-xs-5 col-sm-5">
-                        <img src="img/hjw.jpg" class="img-responsive userimg">
+                        <img src={% static 'image/hjw.jpg' %} class="img-responsive userimg">
                     </div>
                     <div class="col-md-7 col-xs-7 col-sm-7 username">
                         <h4>用户名</h4>

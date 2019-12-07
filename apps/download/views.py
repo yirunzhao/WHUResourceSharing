@@ -1,3 +1,10 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
-# Create your views here.
+def download(request):
+    return render(request, 'download/downloadMain.html')
+
+
+
+def download_detail(request,catagory,file_id):
+    return HttpResponse(str(catagory)+'#'*10+str(file_id))

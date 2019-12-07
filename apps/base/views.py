@@ -9,6 +9,17 @@ from django.views import View
 from apps.whursauth.models import User
 
 
+rank_list = ['编译原理','算法','计算机组成原理','微机接口','模式识别','machine learning']
+persons = {
+    'hjw': {'image': 'image/hjw.jpg', 'text': '11111111'},
+    'zyr': {'image': 'image/zyr.jpg', 'text': '22222222'},
+    'djc': {'image': 'image/djc.jpg', 'text': '33333333'},
+    'xzy': {'image': 'image/xzy.jpg', 'text': '44444444'},
+}
+context = {
+    'rank_list': rank_list,
+    'persons': persons
+}
 # login的视图类
 class LoginView(View):
     # get方式访问直接返回渲染的模板
@@ -35,8 +46,18 @@ class LoginView(View):
                         request.session.set_expiry(0)
                     # 关于返回值，和前端人员约定好，看p245
                     # return JsonResponse({'code': 200, 'message': '', 'data': {}})
-                    rank_list = ['编译原理','算法','计算机组成原理','微机接口','模式识别']
-                    return render(request,'base/index.html',context={'rank_list':rank_list})
+                    # rank_list = ['编译原理', '算法', '计算机组成原理', '微机接口', '模式识别']
+                    # persons = {
+                    #     'hjw': {'image': 'image/hjw.jpg', 'text': '11111111'},
+                    #     'zyr': {'image': 'image/zyr.jpg', 'text': '22222222'},
+                    #     'djc': {'image': 'image/djc.jpg', 'text': '33333333'},
+                    #     'xzy': {'image': 'image/xzy.jpg', 'text': '44444444'},
+                    # }
+                    # context = {
+                    #     'rank_list': rank_list,
+                    #     'persons': persons
+                    # }
+                    return render(request,'base/index.html',context=context)
                 else:
                     return JsonResponse({'code': 405, 'message': '账号不是active', 'data': {}})
             else:
@@ -71,18 +92,18 @@ class RegisterView(View):
 
 def index(request):
 
-    rank_list = ['编译原理', '算法', '计算机组成原理', '微机接口', '模式识别']
-
-    persons = {
-        'hjw' : {'image':'image/hjw.jpg','text':'11111111'},
-        'zyr' : {'image':'image/zyr.jpg','text':'22222222'},
-        'djc' : {'image':'image/djc.jpg','text':'33333333'},
-        'xzy' : {'image':'image/xzy.jpg','text':'44444444'},
-    }
-    context = {
-        'rank_list': rank_list,
-        'persons': persons
-    }
+    # rank_list = ['编译原理', '算法', '计算机组成原理', '微机接口', '模式识别']
+    #
+    # persons = {
+    #     'hjw' : {'image':'image/hjw.jpg','text':'11111111'},
+    #     'zyr' : {'image':'image/zyr.jpg','text':'22222222'},
+    #     'djc' : {'image':'image/djc.jpg','text':'33333333'},
+    #     'xzy' : {'image':'image/xzy.jpg','text':'44444444'},
+    # }
+    # context = {
+    #     'rank_list': rank_list,
+    #     'persons': persons
+    # }
     return render(request,'base/index.html',context=context)
 
 
