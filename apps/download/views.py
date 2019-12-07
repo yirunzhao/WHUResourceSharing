@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def download(request):
-    return render(request, 'download/downloadMain.html')
+    return render(request, 'download/findresource.html')
 
 
 
