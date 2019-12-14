@@ -8,6 +8,7 @@ def user_information(request):
         if user:
             context['std_id'] = user.std_id
             context['username'] = user.username
+            context['user_portrait'] = user.portrait
     except:
         pass
     return context

@@ -40,7 +40,8 @@ class User(AbstractBaseUser,PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     # 什么时候加入
     date_joined = models.DateTimeField(auto_now_add=True)
-
+    # 头像
+    portrait = models.ImageField(upload_to='user_portrait',default='image/user.png')
     ## 本次项目独有的字段
     # 学号
     std_id = models.CharField(max_length=13,unique=True)

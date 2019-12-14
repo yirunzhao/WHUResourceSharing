@@ -12,20 +12,25 @@
 <body>
 <header>
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container-fluid" style="background: forestgreen">
+        <div class="container-fluid" style="background-image: url({% static 'image/header.jpg' %})">
             <div class="navbar-header">
                 <img src={% static 'image/whitewhulogo.png' %} class="whulogo">
             </div>
             <div>
                 <ul class="nav navbar-nav guidelabel">
                     <li><a href={% url 'download' %}><div class="underline"><img src={% static 'image/documents.png' %} class="documentsPic">&emsp;学习资料</div></a></li>
-                    <li><a href="#"><div class="underline">test</div></a></li>
+
                 </ul>
             </div>
             <div class="navbar-right">
-                <img src={% static 'image/akari.jpg' %} class="loginPic">
+                {% if std_id %}
+                    <img src="/static/image/{{ user_portrait }}" class="loginPic">
+                    {% else %}
+                    <img src={% static 'image/akari.jpg' %} class="loginPic">
+                {% endif %}
+
                 {% if username %}
-                    <span class="title" style="margin-right: 10px">{{ username }}</span>
+                    <a href={% url 'base:base_user' std_id%}><span class="title" style="margin-right: 10px">{{ username }}</span></a>
                 {% else %}
 {#                    <p style="color: white">未登录</p>#}
                     <a class="btn btn-default btnlogin"href={% url 'base:base_login' %} >登录</a>
@@ -35,12 +40,6 @@
                 {% endif %}
 
             </div>
-            <form class="navbar-form navbar-right" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control">
-                </div>
-                <button type="button" class="btn btn-default navbar-button"><img class="searchbutton" src={% static 'image/search.png' %}></button>
-            </form>
         </div>
     </nav>
 </header>
