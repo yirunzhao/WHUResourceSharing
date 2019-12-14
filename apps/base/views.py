@@ -92,7 +92,8 @@ def reveive_protrait(request):
     form = UserForm(request.POST,request.FILES)
     if form.is_valid():
         portrait = form.cleaned_data.get('portrait')
-        user = User.objects.get(std_id='2017301110003')
+        std_id = request.session.get('std_id')
+        user = User.objects.get(std_id=std_id)
         user.portrait = portrait
         user.save()
         return HttpResponse(str(user.portrait))
