@@ -82,19 +82,6 @@ class RegisterView(View):
 
 
 def index(request):
-
-    # rank_list = ['编译原理', '算法', '计算机组成原理', '微机接口', '模式识别']
-    #
-    # persons = {
-    #     'hjw' : {'image':'image/hjw.jpg','text':'11111111'},
-    #     'zyr' : {'image':'image/zyr.jpg','text':'22222222'},
-    #     'djc' : {'image':'image/djc.jpg','text':'33333333'},
-    #     'xzy' : {'image':'image/xzy.jpg','text':'44444444'},
-    # }
-    # context = {
-    #     'rank_list': rank_list,
-    #     'persons': persons
-    # }
     return render(request,'base/index.html',context=context)
 
 
@@ -111,3 +98,8 @@ def reveive_protrait(request):
         return HttpResponse(str(user.portrait))
     else:
         return HttpResponse('不行')
+
+
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('base:base_index'))

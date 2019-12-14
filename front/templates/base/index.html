@@ -30,6 +30,7 @@
                 {% endif %}
 
                 {% if username %}
+                    <a class="btn btn-default btnlogin"href={% url 'base:base_logout' %} >登出</a>
                     <a href={% url 'base:base_user' std_id%}><span class="title" style="margin-right: 10px">{{ username }}</span></a>
                 {% else %}
 {#                    <p style="color: white">未登录</p>#}
