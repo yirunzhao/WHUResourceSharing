@@ -9,7 +9,7 @@ from django.views import View
 from apps.whursauth.models import User
 # DJC
 from shortuuidfield import ShortUUIDField
-from apps.whursauth.models import TagList, TagResourceLink, Resource
+from apps.whursauth.models import Resource
 
 
 rank_list = ['编译原理','算法','计算机组成原理','微机接口','模式识别','machine learning']
@@ -88,13 +88,45 @@ def index(request):
 
 
 def user_page(request,user_id):
-    return render(request,'base/user.html',context={'user_id':user_id})
+	user = User.objects.get(std_id = user_id)
+	print(user.email)
+
+	#get upload history
+	upload_uid = user.upload_history.split(",")
+	print(upload_uid)
+	if len(upload_uid) >= 3:
+		length = 3
+	else:
+		length = len(upload_uid)
+	if upload_uid[0] == '':
+		length = 0
+	ufiles = []
+	print(length)
+	for i in range(length):
+		ufiles.append(Resource.objects.get(uid = upload_uid[i]))
+
+	#get download history
+	download = user.upload_history.split(",")
+	if len(download) >= 3:
+		length = 3
+	else:
+		length = len(upload_uid)
+
+	if download[0] =='':
+		length  = 0
+	dfiles = []
+	for i in range(length):
+		dfiles.append(Resource.objects.get(uid=download[i]))
+
+	return render(request, 'base/user.html', context={'user_id': user_id, 'nickname': user.username, 'email': user.email
+		, 'points': 0, 'date': user.date_joined, 'ufiles': ufiles, 'dfiles': dfiles})
+
 
 def reveive_protrait(request):
     form = UserForm(request.POST,request.FILES)
     if form.is_valid():
         portrait = form.cleaned_data.get('portrait')
-        user = User.objects.get(std_id='2017301110003')
+        user = User.objects.get(std_id='2017301110017')
         user.portrait = portrait
         user.save()
         return HttpResponse(str(user.portrait))
@@ -107,31 +139,38 @@ def user_logout(request):
     return redirect(reverse('base:base_index'))
 
 # DJC
+
 MEDIA_ROOT = "D:\media"  # 后面再改
 
-
 @require_POST
-def upload_view(request):
+def upload_view(request, user_id):
+
+	user = User.objects.get(std_id = user_id)
 	file = request.FILES.get('file')
 	filename = request.POST.get('filename')
 	fuid = ShortUUIDField()
-	f = open(MEDIA_ROOT, 'wb')
+
+	year = int(request.POST.get('year'))
+	department = request.POST.get('dept')
+	fileurl = MEDIA_ROOT+fuid+filename.split(".")[-1]
+	f = open(fileurl, 'wb')
 	for i in file.chunks():
 		f.write(i)
-	resource = Resource.create(uid=fuid, title= filename, is_valid=True)  # 不知道怎么获取当前用户
-	resource.save()
-	link(fuid)  # 再把该文件的tag和resource连接起来
+	resource = Resource.create(uid=fuid, title= filename, is_valid=True, year = year,
+							   department = department, absurl = fileurl, upload_user = user)  # 不知道怎么获取当前用户
+	user.upload_history = user.upload_history + ',' + fuid
+	resource.save() # 再把该文件的tag和resource连接起来
 
 	return HttpResponse('上传成功!')
 
-def link(fuid, *taglist):
-	for tag in taglist:
-		try:
-			tag_obj = TagList.objects.get(tag_name=tag)
-			rs_obj = Resource.objects.get(uid=fuid)
-		except:
-			print("Not found")
-		else:
-			link = TagResourceLink.create(tag_obj, rs_obj)
-			tag_obj.link_count += 1
-			link.save()
+# def link(fuid, *taglist):
+# 	for tag in taglist:
+# 		try:
+# 			tag_obj = TagList.objects.get(tag_name=tag)
+# 			rs_obj = Resource.objects.get(uid=fuid)
+# 		except:
+# 			print("Not found")
+# 		else:
+# 			link = TagResourceLink.create(tag_obj, rs_obj)
+# 			tag_obj.link_count += 1
+# 			link.save()

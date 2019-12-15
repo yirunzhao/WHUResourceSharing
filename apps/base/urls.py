@@ -11,5 +11,5 @@ urlpatterns = [
     path('test/',views.reveive_protrait,name='receive_portrait'),
     path('user_logout/',views.user_logout,name='base_logout'),
 
-    path('user/upload/', views.upload_view, name='upload'),]
+    path('user/<user_id>/upload/', views.upload_view, name='upload'),]
 # path('login_in/',views.login_view,name='login')

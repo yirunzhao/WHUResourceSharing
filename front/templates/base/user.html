@@ -40,17 +40,17 @@ extra_js:
 			<p class="mb-4 h5 nav-link text-secondary">{{ username }}</p>
 			<ul class="nav flex-column ">
 			  <li class="nav-item">
-				<a class="nav-link active text-info" href="#">
+				<a class="nav-link active text-info" href="#info">
 				  个人信息 
 				</a>
 			  </li>
 			  <li class="nav-item">
-				<a class="nav-link text-info" href="#">
+				<a class="nav-link text-info" href="#download">
 				  已下载资料
 				</a>
 			  </li>
 			  <li class="nav-item">
-				<a class="nav-link text-info" href="#">
+				<a class="nav-link text-info" href="#upload">
 				  已上传资料
 				</a>
 			  </li>
@@ -65,20 +65,22 @@ extra_js:
 
 			</div>
 		  </div>
-		  <p>昵称：</p>
-		  <p>邮箱：</p>
-		  <p>积分：</p>
-		  <p>注册时间： </p>
+			<a name = "info"></a>
+		  <p>昵称：{{nickname}}</p>
+		  <p>邮箱：{{email}}</p>
+		  <p>积分：{{points}}</p>
+		  <p>注册时间： {{date}} </p>
             <form action={% url 'base:receive_portrait' %} method="post" enctype="multipart/form-data">
                 <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
                 <input type="file" name="portrait">
                 <input type="submit" value="ok">
             </form>
 		  <div class="downloadPage mt-5">
+			  <a name = 'download'></a>
 			<h1 class="h2 mb-3" >我的下载</h1>
 			<div class="album bg-light">
 					<div class="container">
-
+						{% for file in dfiles %}
 					  <div class="row">
 						<div class="col-md-4">
 						  <div class="card mb-4 shadow-sm mt-4">
@@ -95,44 +97,49 @@ extra_js:
 							</div>
 						  </div>
 						</div>
-						<div class="col-md-4">
-						  <div class="card mb-4 shadow-sm mt-4">
-							<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
-							<div class="card-body">
-							  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-							  <div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group">
-								  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-								  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-								</div>
-								<small class="text-muted">9 mins</small>
-							  </div>
-							</div>
-						  </div>
-						</div>
-						<div class="col-md-4">
-						  <div class="card mb-4 shadow-sm mt-4">
-							<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
-							<div class="card-body">
-							  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-							  <div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group">
-								  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-								  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-								</div>
-								<small class="text-muted">9 mins</small>
-							  </div>
-							</div>
-						  </div>
-						</div>
+						  {% empty %}
+						  <p>你还没有下载过文件！</p>
+						  {% endfor %}
+						<!--<div class="col-md-4">-->
+						  <!--<div class="card mb-4 shadow-sm mt-4">-->
+							<!--<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">-->
+							<!--<div class="card-body">-->
+							  <!--<p class="card-text">{{ufiles[0}.title}</p>-->
+							  <!--<div class="d-flex justify-content-between align-items-center">-->
+								<!--<div class="btn-group">-->
+								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">View</button>-->
+								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
+								<!--</div>-->
+								<!--<small class="text-muted">9 mins</small>-->
+							  <!--</div>-->
+							<!--</div>-->
+						  <!--</div>-->
+						<!--</div>-->
+						<!--<div class="col-md-4">-->
+						  <!--<div class="card mb-4 shadow-sm mt-4">-->
+							<!--<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">-->
+							<!--<div class="card-body">-->
+							  <!--<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+							  <!--<div class="d-flex justify-content-between align-items-center">-->
+								<!--<div class="btn-group">-->
+								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">View</button>-->
+								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
+								<!--</div>-->
+								<!--<small class="text-muted">9 mins</small>-->
+							  <!--</div>-->
+							<!--</div>-->
+						  <!--</div>-->
+						<!--</div>-->
             </div>
 		  </div>
 		  <div class="uploadPage ">
+			  <a name = 'upload'></a>
 			<h1 class="h2 pt-3 pb-3 bg-white ">我的上传</h1>
 			<div class="album bg-light">
 					<div class="container">
 
 					  <div class="row">
+						  {% for file in ufiles %}
 						<div class="col-md-4">
 						  <div class="card mb-4 shadow-sm mt-4">
 							<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
@@ -148,36 +155,39 @@ extra_js:
 							</div>
 						  </div>
 						</div>
-						<div class="col-md-4">
-						  <div class="card mb-4 shadow-sm mt-4">
-							<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
-							<div class="card-body">
-							  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-							  <div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group">
-								  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-								  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-								</div>
-								<small class="text-muted">9 mins</small>
-							  </div>
-							</div>
-						  </div>
-						</div>
-						<div class="col-md-4">
-						  <div class="card mb-4 shadow-sm mt-4">
-							<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
-							<div class="card-body">
-							  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-							  <div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group">
-								  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-								  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-								</div>
-								<small class="text-muted">9 mins</small>
-							  </div>
-							</div>
-						  </div>
-						</div>
+						  {% empty %}
+						  <p>你还没有下载过文件</p>
+						  {% endfor %}
+						<!--<div class="col-md-4">-->
+						  <!--<div class="card mb-4 shadow-sm mt-4">-->
+							<!--<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">-->
+							<!--<div class="card-body">-->
+							  <!--<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+							  <!--<div class="d-flex justify-content-between align-items-center">-->
+								<!--<div class="btn-group">-->
+								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">View</button>-->
+								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
+								<!--</div>-->
+								<!--<small class="text-muted">9 mins</small>-->
+							  <!--</div>-->
+							<!--</div>-->
+						  <!--</div>-->
+						<!--</div>-->
+						<!--<div class="col-md-4">-->
+						  <!--<div class="card mb-4 shadow-sm mt-4">-->
+							<!--<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">-->
+							<!--<div class="card-body">-->
+							  <!--<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+							  <!--<div class="d-flex justify-content-between align-items-center">-->
+								<!--<div class="btn-group">-->
+								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">View</button>-->
+								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
+								<!--</div>-->
+								<!--<small class="text-muted">9 mins</small>-->
+							  <!--</div>-->
+							<!--</div>-->
+						  <!--</div>-->
+						<!--</div>-->
             </div>
  		  </div>
 		  
