@@ -123,15 +123,15 @@ def user_page(request,user_id):
 
 
 def reveive_protrait(request):
-    form = UserForm(request.POST,request.FILES)
-    if form.is_valid():
-        portrait = form.cleaned_data.get('portrait')
-        user = User.objects.get(std_id='2017301110017')
-        user.portrait = portrait
-        user.save()
-        return HttpResponse(str(user.portrait))
-    else:
-        return HttpResponse('不行')
+	form = UserForm(request.POST,request.FILES)
+	if form.is_valid():
+		portrait = form.cleaned_data.get('portrait')
+		user = User.objects.get(std_id='2017301110017')
+		user.portrait = portrait
+		user.save()
+		return HttpResponse(str(user.portrait))
+	else:
+		return HttpResponse('不行')
 
 
 def user_logout(request):
