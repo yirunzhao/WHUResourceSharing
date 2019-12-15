@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>下载页</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href={% static 'css/downloadmain.css' %}>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 col-sm-9 col-xs-9">
+            <div class="search">
+                <div class="input-group">
+                    <span class="input-group-addon">关键字：</span>
+                    <input type="text" class="form-control">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">搜索</button>
+                    </span>
+                </div>
+            </div>
+            &emsp;
+            <div class="list-group">
+                <a href="#" class="list-group-item">
+                    <div class="col-md-2 col-xs-2 col-sm-2">
+                        <img src={% static 'image/hjw.jpg' %} class="downloadimg">
+                    </div>
+                    <h4 class="list-group-item-heading">
+                        计算机安全保密
+                    </h4>
+                    <span class="badge">积分：20</span>
+                    <p class="list-group-item-text">
+                        计算机安全与保密2015年试卷。
+                    </p>
+                </a>
+                <a href="#" class="list-group-item">
+                    <div class="col-md-2 col-xs-2 col-sm-2">
+                        <img src={% static 'image/hjw.jpg' %} class="downloadimg">
+                    </div>
+                    <h4 class="list-group-item-heading">
+                        Linux原理与应用
+                    </h4>
+                    <span class="badge">积分：20</span>
+                    <p class="list-group-item-text">
+                        Linxu原理与应用2015年试卷
+                    </p>
+                </a>
+                <a href="#" class="list-group-item">
+                    <div class="col-md-2 col-xs-2 col-sm-2">
+                        <img src={% static 'image/hjw.jpg' %} class="downloadimg">
+                    </div>
+                    <h4 class="list-group-item-heading">
+                        计算机体系结构
+                    </h4>
+                    <span class="badge">积分：20</span>
+                    <p class="list-group-item-text">
+                        计算机体系结构2015年试卷
+                    </p>
+                </a>
+                <a href="#" class="list-group-item">
+                    <div class="col-md-2 col-xs-2 col-sm-2">
+                        <img src={% static 'image/hjw.jpg' %} class="downloadimg">
+                    </div>
+                    <h4 class="list-group-item-heading">
+                        编译原理
+                    </h4>
+                    <span class="badge">积分：20</span>
+                    <p class="list-group-item-text">
+                        编译原理2015年试卷
+                    </p>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-3 col-sm-3">
+            <div class="thumbnail">
+                <div class="row">
+                    <div class="col-md-5 col-xs-5 col-sm-5">
+                        <img src="img/hjw.jpg" class="img-responsive userimg">
+                    </div>
+                    <div class="col-md-7 col-xs-7 col-sm-7 username">
+                        <h4>韩金伟</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="caption">
+                        <p>
+                            <a href="#" class="btn btn-primary" role="button">个人中心</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-3 col-sm-3">
+            <div class="list-group">
+                <span class="label label-primary download">下载排行</span>
+                <a href="#" class="list-group-item">计算机安全保密2018年试卷</a>
+                <a href="#" class="list-group-item">计算机安全保密2017年试卷</a>
+                <a href="#" class="list-group-item">计算机安全保密2016年试卷</a>
+                <a href="#" class="list-group-item">Linux原理与应用2018年试卷</a>
+                <a href="#" class="list-group-item">Linux原理与应用2017年试卷</a>
+                <a href="#" class="list-group-item">Linux原理与应用2016年试卷</a>
+                <a href="#" class="list-group-item">编译原理2018年试卷</a>
+                <a href="#" class="list-group-item">编译原理2017年试卷</a>
+                <a href="#" class="list-group-item">编译原理2016年试卷</a>
+                <a href="#" class="list-group-item">计算机体系结构2018年试卷</a>
+                <a href="#" class="list-group-item">计算机体系结构2017年试卷</a>
+                <a href="#" class="list-group-item">计算机体系结构2016年试卷</a>
+                <a href="#" class="list-group-item">Oracle原理与应用2018年试卷</a>
+                <a href="#" class="list-group-item">Oracle原理与应用2017年试卷</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

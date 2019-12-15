@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin,BaseUserManager
 from shortuuidfield import ShortUUIDField
 
-
 class UserManager(BaseUserManager):
     def _create_user(self,std_id,username,password,**kwargs):
         if not std_id:
@@ -27,6 +26,7 @@ class UserManager(BaseUserManager):
         return self._create_user(std_id,username,password,**kwargs)
 
 
+
 class User(AbstractBaseUser,PermissionsMixin):
     # 不使用默认增长主键
     # 使用shortuuid
@@ -40,7 +40,8 @@ class User(AbstractBaseUser,PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     # 什么时候加入
     date_joined = models.DateTimeField(auto_now_add=True)
-
+    # 头像
+    portrait = models.ImageField(upload_to='user_portrait',default='image/user.png')
     ## 本次项目独有的字段
     # 学号
     std_id = models.CharField(max_length=13,unique=True)
