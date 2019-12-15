@@ -9,7 +9,8 @@ from django.views import View
 from apps.whursauth.models import User
 # DJC
 from shortuuidfield import ShortUUIDField
-from apps.whursauth.models import Resource
+from apps.whursauth.models import User,Resource
+
 
 
 rank_list = ['编译原理','算法','计算机组成原理','微机接口','模式识别','machine learning']
@@ -84,42 +85,24 @@ class RegisterView(View):
 
 
 def index(request):
+    # 这里从数据库中取数据，放入context中取，参考上面的context格式
+    # 使用字典添加的方式将数据库元素添加进去
+    res = Resource.objects.filter(download_count__gt=3)
+
+    context['res'] = res
+
+    # 返回渲染好的模板
     return render(request,'base/index.html',context=context)
 
 
-def user_page(request,user_id):
-	user = User.objects.get(std_id = user_id)
-	print(user.email)
-
-	#get upload history
-	upload_uid = user.upload_history.split(",")
-	print(upload_uid)
-	if len(upload_uid) >= 3:
-		length = 3
-	else:
-		length = len(upload_uid)
-	if upload_uid[0] == '':
-		length = 0
-	ufiles = []
-	print(length)
-	for i in range(length):
-		ufiles.append(Resource.objects.get(uid = upload_uid[i]))
-
-	#get download history
-	download = user.upload_history.split(",")
-	if len(download) >= 3:
-		length = 3
-	else:
-		length = len(upload_uid)
-
-	if download[0] =='':
-		length  = 0
-	dfiles = []
-	for i in range(length):
-		dfiles.append(Resource.objects.get(uid=download[i]))
-
-	return render(request, 'base/user.html', context={'user_id': user_id, 'nickname': user.username, 'email': user.email
-		, 'points': 0, 'date': user.date_joined, 'ufiles': ufiles, 'dfiles': dfiles})
+# def user_page(request,user_id):
+# 	user = User.objects.get(std_id = user_id)
+# 	print(user.email)
+#
+# 	#get upload history
+#
+#
+# 	return render(request, 'base/user.html', context={)
 
 
 def reveive_protrait(request):
@@ -132,6 +115,67 @@ def reveive_protrait(request):
 		return HttpResponse(str(user.portrait))
 	else:
 		return HttpResponse('不行')
+
+def user_page(request,std_id):
+	try:
+		user = User.objects.get(std_id=std_id)
+	except:
+		return HttpResponse("没这人")
+	# 验证是否是cookie存储了信息的用户
+	else:
+		session_id = request.session.get('std_id')
+
+		# DJC added 在context里面包含用户的各种信息
+		if user.std_id == session_id:
+			#显示信息
+			upload_uid = user.upload_history.split(",")
+			print(upload_uid)
+			if len(upload_uid) >= 3:
+				length = 3
+			else:
+				length = len(upload_uid)
+			if upload_uid[0] == '':
+				length = 0
+			ufiles = []
+			print(length)
+			for i in range(length):
+				ufiles.append(Resource.objects.get(uid=upload_uid[i]))
+
+			# get download history
+			download = user.upload_history.split(",")
+			if len(download) >= 3:
+				length = 3
+			else:
+				length = len(upload_uid)
+
+			if download[0] == '':
+				length = 0
+			dfiles = []
+			for i in range(length):
+				dfiles.append(Resource.objects.get(uid=download[i]))
+			context = {
+			'user' : user,
+			'ufiles': ufiles,
+			'dfiles': dfiles
+			}
+
+			return render(request,'base/user.html',context=context)
+
+		else:
+			return HttpResponse('无权访问他人主页')
+
+
+def reveive_protrait(request):
+    form = UserForm(request.POST,request.FILES)
+    if form.is_valid():
+        portrait = form.cleaned_data.get('portrait')
+        std_id = request.session.get('std_id')
+        user = User.objects.get(std_id=std_id)
+        user.portrait = portrait
+        user.save()
+        return HttpResponse(str(user.portrait))
+    else:
+        return HttpResponse('不行')
 
 
 def user_logout(request):

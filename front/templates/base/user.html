@@ -65,12 +65,11 @@ extra_js:
 
 			</div>
 		  </div>
-			<a name = "info"></a>
-		  <p>昵称：{{nickname}}</p>
-		  <p>邮箱：{{email}}</p>
-		  <p>积分：{{points}}</p>
-		  <p>注册时间： {{date}} </p>
-            <form action={% url 'base:receive_portrait' %} method="post" enctype="multipart/form-data">
+		  <p>昵称：{{ user.username }}</p>
+		  <p>邮箱：{{ user.email }}</p>
+		  <p>积分：{{ user.points }}</p>
+		  <p>注册时间：{{ user.date_joined }} </p>
+            <form action= {% url 'base:receive_portrait' %} method="post" enctype="multipart/form-data">
                 <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
                 <input type="file" name="portrait">
                 <input type="submit" value="ok">
