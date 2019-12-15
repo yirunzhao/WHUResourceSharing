@@ -7,6 +7,39 @@ from .forms import LoginForm,RegisterForm
 from django.http import JsonResponse
 from django.views import View
 from apps.whursauth.models import User
+# DJC
+from shortuuidfield import ShortUUIDField
+from apps.whursauth.models import TagList, TagResourceLink, Resource
+
+# DJC
+MEDIA_ROOT = "D:\media"  # 后面再改
+
+
+@require_POST
+def upload_view(request):
+	file = request.FILES.get('file')
+	filename = request.POST.get('filename')
+	fuid = ShortUUIDField()
+	f = open(MEDIA_ROOT, 'wb')
+	for i in file.chunks():
+		f.write(i)
+	resource = Resource.create(uid=fuid, title= filename, is_valid=True)  # 不知道怎么获取当前用户
+	resource.save()
+	link(fuid)  # 再把该文件的tag和resource连接起来
+
+	return HttpResponse('上传成功!')
+
+def link(fuid, *taglist):
+	for tag in taglist:
+		try:
+			tag_obj = TagList.objects.get(tag_name=tag)
+			rs_obj = Resource.objects.get(uid=fuid)
+		except:
+			print("Not found")
+		else:
+			link = TagResourceLink.create(tag_obj, rs_obj)
+			tag_obj.link_count += 1
+			link.save()
 
 
 # login的视图类
@@ -63,3 +96,4 @@ class RegisterView(View):
         else:
             errors = form.get_errors()
             return JsonResponse({'code':499,'message':'','data':errors})
+

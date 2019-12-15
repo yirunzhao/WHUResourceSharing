@@ -97,7 +97,7 @@ class Resource(models.Model):
     download_count = models.IntegerField()
     is_valid = models.BooleanField(default=True)
 
-    tag = models.CharField(max_length=20)  # TBD
+    # tag = models.CharField(max_length=20)  # TBD
 
 
 class TagList(models.Model):
