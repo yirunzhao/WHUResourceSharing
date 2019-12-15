@@ -6,7 +6,7 @@ from django.views.decorators.http import require_POST
 from .forms import LoginForm,RegisterForm,UserForm
 from django.http import JsonResponse
 from django.views import View
-from apps.whursauth.models import User
+from apps.whursauth.models import User,Resource
 
 
 rank_list = ['编译原理','算法','计算机组成原理','微机接口','模式识别','machine learning']
@@ -82,11 +82,32 @@ class RegisterView(View):
 
 
 def index(request):
+    # 这里从数据库中取数据，放入context中取，参考上面的context格式
+    # 使用字典添加的方式将数据库元素添加进去
+    res = Resource.objects.filter(download_count__gt=3)
+
+    context['res'] = res
+
+    # 返回渲染好的模板
     return render(request,'base/index.html',context=context)
 
 
-def user_page(request,user_id):
-    return render(request,'base/user.html',context={'user_id':user_id})
+def user_page(request,std_id):
+    try:
+        user = User.objects.get(std_id=std_id)
+    except:
+        return HttpResponse("没这人")
+
+    # 验证是否是cookie存储了信息的用户
+    session_id = request.session.get('std_id')
+    if user.std_id == session_id:
+        context = {
+            'user' : user
+        }
+        return render(request,'base/user.html',context=context)
+    else:
+        return HttpResponse('无权访问他人主页')
+
 
 def reveive_protrait(request):
     form = UserForm(request.POST,request.FILES)

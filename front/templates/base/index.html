@@ -109,9 +109,12 @@
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 list-group" style="background-color: white;">
             <span class="label label-primary download">下载排行</span>
-            {% for item in rank_list %}
-                <a href="#" class="list-group-item">{{ item }}</a>
-            {% endfor %}
+{#            {% for item in rank_list %}#}
+{#                <a href="#" class="list-group-item">{{ item }}</a>#}
+{#            {% endfor %}#}
+                {% for re in res %}
+                   <a href="#" class="list-group-item">{{ re.title }}</a>
+                {% endfor %}
 
 
         </div>
