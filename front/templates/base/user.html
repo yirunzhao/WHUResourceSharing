@@ -74,128 +74,84 @@ extra_js:
                 <input type="file" name="portrait">
                 <input type="submit" value="ok">
             </form>
+            <form action='upload/' method="post" enctype="multipart/form-data" >
+
+			 <input type="text" name="filename"/>
+			 <input type="number" name = 'year'/>
+			 <input type="text" name="dept"/>
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                    <input type="file" name="upload_file" >
+			 <input type="submit" value="ok">
+		 </form>
 		  <div class="downloadPage mt-5">
 			  <a name = 'download'></a>
 			<h1 class="h2 mb-3" >我的下载</h1>
 			<div class="album bg-light">
 					<div class="container">
-						{% for file in dfiles %}
+
 					  <div class="row">
+						  {% for file in dfiles %}
 						<div class="col-md-4">
 						  <div class="card mb-4 shadow-sm mt-4">
-							<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
+							<img class="rounded mx-auto d-block" src="/static/image/{{ file.upload_user.portrait }}" alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
 							<div class="card-body">
-							  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+							  <p class="card-text">文件名: {{ file.title }}</p>
+								<p class="card-text">上传自: {{ file.upload_user.username }}</p>
+								<p class="card-text">分类: {{ file.department }}, {{ file.year }}</p>
+								<p class="card-text">上传日期: {{ file.upload_time|date:"Y-m-d H:i:s" }}</p>
 							  <div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
-								  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-								  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+									<a href="download/{{ file.uid }}"><button type="button" class="btn btn-sm btn-outline-secondary">下载</button></a>
+								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
 								</div>
-								<small class="text-muted">9 mins</small>
+								<small class="text-muted">已被下载{{ file.download_count }}次</small>
 							  </div>
 							</div>
 						  </div>
-							 {% empty %}
+						</div>
+						  {% empty %}
 						  <p>你还没有下载过文件！</p>
 						  {% endfor %}
-						</div>
-
-						<!--<div class="col-md-4">-->
-						  <!--<div class="card mb-4 shadow-sm mt-4">-->
-							<!--<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">-->
-							<!--<div class="card-body">-->
-							  <!--<p class="card-text">{{ufiles[0}.title}</p>-->
-							  <!--<div class="d-flex justify-content-between align-items-center">-->
-								<!--<div class="btn-group">-->
-								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">View</button>-->
-								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
-								<!--</div>-->
-								<!--<small class="text-muted">9 mins</small>-->
-							  <!--</div>-->
-							<!--</div>-->
-						  <!--</div>-->
-						<!--</div>-->
-						<!--<div class="col-md-4">-->
-						  <!--<div class="card mb-4 shadow-sm mt-4">-->
-							<!--<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">-->
-							<!--<div class="card-body">-->
-							  <!--<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
-							  <!--<div class="d-flex justify-content-between align-items-center">-->
-								<!--<div class="btn-group">-->
-								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">View</button>-->
-								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
-								<!--</div>-->
-								<!--<small class="text-muted">9 mins</small>-->
-							  <!--</div>-->
-							<!--</div>-->
-						  <!--</div>-->
-						<!--</div>-->
             </div>
+
 		  </div>
+			</div>
 		  <div class="uploadPage ">
 			  <a name = 'upload'></a>
 			<h1 class="h2 pt-3 pb-3 bg-white ">我的上传</h1>
 			<div class="album bg-light">
 					<div class="container">
-
 					  <div class="row">
 						  {% for file in ufiles %}
 						<div class="col-md-4">
 						  <div class="card mb-4 shadow-sm mt-4">
-							<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
+							<img class="rounded mx-auto d-block" src="/static/image/{{ file.upload_user.portrait }}" alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">
 							<div class="card-body">
-							  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+							  <p class="card-text">文件名: {{ file.title }}</p>
+								<p class="card-text">上传自: {{ file.upload_user.username }}</p>
+								<p class="card-text">分类: {{ file.department }}, {{ file.year }}</p>
+								<p class="card-text">上传日期: {{ file.upload_time|date:"Y-m-d H:i:s" }}</p>
 							  <div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
-								  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-								  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+								  <a href="download/{{ file.uid }}"><button type="button"  class="btn btn-sm btn-outline-secondary">下载</button></a>
+								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
 								</div>
-								<small class="text-muted">9 mins</small>
+								<small class="text-muted">已被下载{{ file.download_count }}次</small>
 							  </div>
 							</div>
 						  </div>
-							{% empty %}
-						  <p>你还没有下载过文件</p>
+							</div>
+						  {% empty %}
+						  <p>您还没有上传过文件</p>
 						  {% endfor %}
-						</div>
-
-						<!--<div class="col-md-4">-->
-						  <!--<div class="card mb-4 shadow-sm mt-4">-->
-							<!--<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">-->
-							<!--<div class="card-body">-->
-							  <!--<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
-							  <!--<div class="d-flex justify-content-between align-items-center">-->
-								<!--<div class="btn-group">-->
-								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">View</button>-->
-								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
-								<!--</div>-->
-								<!--<small class="text-muted">9 mins</small>-->
-							  <!--</div>-->
-							<!--</div>-->
-						  <!--</div>-->
-						<!--</div>-->
-						<!--<div class="col-md-4">-->
-						  <!--<div class="card mb-4 shadow-sm mt-4">-->
-							<!--<img class="rounded mx-auto d-block" src={% static 'image/user.png' %} alt="头像" width="30%"  background="#55595c" color="#eceeef"  text="Thumbnail">-->
-							<!--<div class="card-body">-->
-							  <!--<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
-							  <!--<div class="d-flex justify-content-between align-items-center">-->
-								<!--<div class="btn-group">-->
-								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">View</button>-->
-								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
-								<!--</div>-->
-								<!--<small class="text-muted">9 mins</small>-->
-							  <!--</div>-->
-							<!--</div>-->
-						  <!--</div>-->
-						<!--</div>-->
             </div>
  		  </div>
-		  
 
-		</main>
+
 	  </div>
+
 	</div>
+
 
 
 
