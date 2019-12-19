@@ -15,3 +15,6 @@ class RegisterForm(forms.Form,FormMixin):
 
 class UserForm(forms.Form,FormMixin):
     portrait = forms.ImageField()
+
+class FileForm(forms.Form,FormMixin):
+    file = forms.FileField()

@@ -90,7 +90,7 @@ class Resource(models.Model):
     """
     uid = ShortUUIDField(primary_key=True)
     title = models.CharField(max_length=40)  # I don't make it unique so we need to rename the real file on server
-    abs_url = models.CharField(max_length=60, unique=True)
+    file = models.FileField(upload_to="files", default=None)
     upload_time = models.DateTimeField(auto_now_add=True)
     upload_user = models.ForeignKey('User', on_delete='CASCADE')
 

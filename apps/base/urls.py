@@ -1,4 +1,5 @@
 from django.urls import path, include
+from ..download import views as dviews
 from . import views
 
 app_name = 'base'
@@ -7,8 +8,11 @@ urlpatterns = [
     path('register/',views.RegisterView.as_view(),name='base_register'),
     path('user/<std_id>/',views.user_page,name='base_user'),
     path('',views.index,name='base_index'),
+
     path('test/',views.reveive_protrait,name='receive_portrait'),
     path('user_logout/',views.user_logout,name='base_logout'),
     #djc
-    path('user/<user_id>/upload/', views.upload_view, name='upload'),]
+    path('user/<user_id>/upload/', views.upload_view, name='upload_view'),
+    path('user/<user>/download/<uid>',views.download_file, name = 'dld')]
+
 # path('login_in/',views.login_view,name='login')
