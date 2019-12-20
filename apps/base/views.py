@@ -86,7 +86,7 @@ class RegisterView(View):
 
 
 def index(request):
-	res = Resource.objects.filter(download_count__gt=3)
+	res = Resource.objects.all().order_by('-download_count')
 	users = list(User.objects.all())
 	users.sort(key=lambda x:len(x.upload_history))
 	download_stars = users[0:3]
@@ -137,12 +137,12 @@ def download_file(request, user, uid):
 			userobj.download_history = userobj.download_history + ',' + uid
 	userobj.save()
 
-	file = open('D:/PyCharm Community Edition 2018.1/AllNewProjects/WHUResourceSharing1/front/src/image/' + path, 'rb')
+	file = open('D:/documents/WHUResourceSharing/front/src/image/' + path, 'rb')
 	response = StreamingHttpResponse(file)
 	response['Content-Type'] = 'application/octet-stream'
 	name = path.split('/')[-1]
 	print(name)
-	response['Content-Disposition'] = f'attachment;filename="{escape_uri_path(name)}"'
+	response['Content-Disposition'] = 'attachment;filename='+'"'+escape_uri_path(name)+'"'
 	return response
 
 def user_page(request,std_id):
