@@ -16,6 +16,25 @@ extra_js:
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Custom styles for this template -->
     <link href={% static 'css/user.css'%} rel="stylesheet">
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+	$("#headImage").click(function(){
+		$("#headImgChange").click();
+		/*sleep(10000);
+		if (document.getElementById("headImgChange").value != "")
+		{
+			console.log("dsfhujugsjfdas");
+			$("#imgUpload").click();
+		}*/
+		
+		
+	});
+	$("#headImgChange").hide();
+	/*$("#imgUpload").hide();*/
+});
+</script>
  </head>
  <body>
 	<!--
@@ -34,9 +53,19 @@ extra_js:
 	  <div class="row">
 		<nav class="col-md-2 d-none d-md-block bg-light sidebar">
 		  <div class="sidebar-sticky">
-		    <a class="nav-link active" href="#">
-				<img class="img-fluid img-thumbnail" src="/static/image/{{ user_portrait }}" alt="头像" width="100" height="100">
-			</a>
+		  	 <form action= {% url 'base:receive_portrait' %} method="post" enctype="multipart/form-data">
+				 <div class="form-group">
+					 <a class="nav-link active" href="#">
+						<img class="img-fluid img-thumbnail h" id="headImage" src="/static/image/{{ user_portrait }}" alt="头像" width="100" height="100">
+						<input id="headImgChange" type="file" name="portrait">
+					</a>
+				 </div>
+				  <div class="form-group nav-link">
+					<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+					<button class=" btn btn-primary" id="imgUpload" stype="" type="submit" text="上传头像"> 上传头像</button>
+				 </div>
+            </form>
+		    
 			<p class="mb-4 h5 nav-link text-secondary">{{ username }}</p>
 			<ul class="nav flex-column ">
 			  <li class="nav-item">
@@ -59,29 +88,50 @@ extra_js:
 		</nav>
 
 		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-		  <div class="personalPage d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2		mb-3 border-bottom">
-			<h1 class="h2 text-center">个人主页</h1>
-			<div class="btn-toolbar mb-2 mb-md-0">
-
-			</div>
+		  <div class="personalPage pt-3 pb-2 mb-3 border-bottom">
+		  	<a name='info'></a>
+			
+			<h1 class="h2">个人主页</h1>
 		  </div>
-		  <p>昵称：{{ user.username }}</p>
-		  <p>邮箱：{{ user.email }}</p>
-		  <p>积分：{{ user.points }}</p>
-		  <p>注册时间：{{ user.date_joined }} </p>
-            <form action= {% url 'base:receive_portrait' %} method="post" enctype="multipart/form-data">
-                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-                <input type="file" name="portrait">
-                <input type="submit" value="ok">
-            </form>
-            <form action='upload/' method="post" enctype="multipart/form-data" >
-
-			 <input type="text" name="filename"/>
-			 <input type="number" name = 'year'/>
-			 <input type="text" name="dept"/>
-                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-                    <input type="file" name="upload_file" >
-			 <input type="submit" value="ok">
+		  <div>
+		   <div class="mb-3"> 
+		    <div class="personalInfo" >昵称</div>
+			<div class="personalData" >{{ user.username }}</div>
+		   </div>
+		   <div class="mb-3"> 
+		    <div class="personalInfo" >邮箱</div>
+			<div class="personalData" >{{ user.email }}</div>
+		   </div>
+		   <div class="mb-3"> 
+		    <div class="personalInfo" >积分</div>
+			<div class="personalData" >{{ user.points }}</div>
+		   </div>
+		   <div class="mb-3"> 
+		    <div class="personalInfo" >注册时间</div>
+			<div class="personalData">{{ user.date_joined }}</div>
+		   </div>
+		  </div>
+		  <div class= " pt-3 pb-2 mb-3">
+		   <h1 class="h2">上传文件</h1>
+		  </div>
+          <form action='upload/' method="post" enctype="multipart/form-data"">
+			<div class="form-row ">
+			 <div class="col-md-4 mb-3">
+			  <label for="uploadFileName">文件名</label>
+			  <input class="form-control" type="text" id="uploadFileName" name="filename"/ value="aa.txt">
+			 </div>
+			 <div class="col-md-4 mb-3">
+			  <label for="uploadFileYear">年份</label>
+			  <input class="form-control" type="number" id="uploadFileYear" name = 'year'/ value="2019">
+			 </div>
+			 <div class="col-md-4 mb-3">
+			  <label for="uploadFileDept">学院</label>
+			  <input class="form-control" type="text" id="uploadFileDept" name="dept"/ value="计算机学院">
+			 </div>
+			</div>
+			<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+             <input  type="file" name="upload_file" class="float-left">
+			 <button class="float-right btn btn-primary" type="submit"> 上传文件 </button>
 		 </form>
 		  <div class="downloadPage mt-5">
 			  <a name = 'download'></a>

@@ -107,3 +107,26 @@ body {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }
+
+/*
+ js实现点击更换头像
+ 清空样式
+*/
+#headImgChange {
+	display:none;
+}
+
+/*
+用户属性 用于显示用户个人信息
+*/
+.personalInfo {
+	display:inline-block;
+	width:100px;
+}
+.personalData {
+	display:inline-block;
+}
+#aaaa
+{
+    background-color:#d0e4fe;
+}
