@@ -91,7 +91,7 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'USER': 'root',
-        'PASSWORD': 'djc123456',
+        'PASSWORD': 'hjw332335323',
     }
 }
 

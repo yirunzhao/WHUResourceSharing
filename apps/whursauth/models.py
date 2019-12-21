@@ -98,7 +98,7 @@ class Resource(models.Model):
     download_count = models.IntegerField(default=0)
     is_valid = models.BooleanField(default=True)
 
-    year = models.IntegerField()
+    year = models.IntegerField(default=2019)
     department = models.CharField(max_length= 20,default="")
 
     # tag = models.CharField(max_length=20)  # TBD
